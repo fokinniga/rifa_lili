@@ -1,0 +1,108 @@
+:root {
+  --primary-green: #008f39;
+  --dark-text: #333;
+  --light-bg: #fff;
+  --border-color: #008f39;
+  --button-hover: #006f2c;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #fff;
+  color: var(--dark-text);
+}
+
+.container {
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  padding: 20px;
+}
+
+.alert-box {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.alert-icon {
+  font-size: 48px;
+  color: #2c3e50; /* Dark color for the icon */
+  margin-bottom: 10px;
+}
+
+.alert-text {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.payment-info {
+  margin-bottom: 30px;
+}
+
+.payment-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.payment-details {
+  font-size: 18px;
+  font-weight: bold;
+  color: #005a2b; /* Darker green for details */
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 5px 20px;
+  text-align: left;
+}
+
+.payment-details span:first-child {
+  text-align: right;
+  color: #333;
+}
+
+.auto-advance-box {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.continue-btn {
+  background-color: #009e4f;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.continue-btn:hover {
+  background-color: var(--button-hover);
+}
+
+.continue-btn::after {
+  content: "›";
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 1;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pago</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using FontAwesome for the icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="alert-box">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="alert-text">
+                ESTIMADO USUARIO: PRESIONE CONTINUAR PARA OBTENER/RECIBIR INFORMACIÓN/FICHA PARA REALIZAR EL PAGO. ( NO CIERRE LA VENTANA O PESTAÑA, ESTO INTERRUMPIRÁ SU PROCESO DE PAGO).
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <div class="payment-title">
+                Su pago por $ 2645.00 MXN fue autorizado
+            </div>
+            <div class="payment-details">
+                <span>Número de operación:</span>
+                <span style="color: #008f39;">1255305799</span>
+                <span>Número de autorización:</span>
+                <span style="color: #008f39;">571560</span>
+            </div>
+        </div>
+
+        <div class="auto-advance-box">
+            Seleccione continuar o espere <span id="countdown">3</span> segundos para avanzar automáticamente
+        </div>
+
+        <button class="continue-btn" onclick="window.location.reload()">
+            Continuar
+        </button>
+    </div>
+
+    <script>
+        // Simple countdown logic
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            count--;
+            if (countdownEl) countdownEl.textContent = count;
+            
+            if (count <= 0) {
+                clearInterval(timer);
+                // Simulate navigation
+                console.log("Navigating...");
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

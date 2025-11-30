@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - Rifa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Admin specific overrides */
+        .admin-dashboard {
+            max-width: 1200px;
+        }
+
+        .reservation-card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .reservation-info {
+            flex: 1;
+        }
+
+        .reservation-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .status-reserved {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-sold {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="admin-header">
+        <h1>Administración de Rifa</h1>
+        <a href="index.html" style="color: white;">Ver sitio cliente</a>
+    </header>
+
+    <main class="container admin-dashboard">
+
+        <section>
+            <h2>Gestión de Reservas</h2>
+            <div class="controls">
+                <div class="filters" style="display: flex; gap: 10px;">
+                    <button onclick="setFilter('all')" class="btn-secondary">Todos</button>
+                    <button onclick="setFilter('reserved')" class="btn-secondary"
+                        style="background-color: #f39c12;">Pendientes</button>
+                    <button onclick="setFilter('sold')" class="btn-secondary"
+                        style="background-color: #27ae60;">Aprobados</button>
+                </div>
+                <button onclick="loadReservations()" class="btn-secondary">Actualizar Lista</button>
+            </div>
+            <div id="reservationsList">
+                <p>Cargando reservas...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="admin-script.js"></script>
+</body>
+
+</html>
