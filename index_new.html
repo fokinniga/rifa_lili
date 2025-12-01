@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Rifa - Compra de Boletos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <h1>Gran Rifa 2025</h1>
+        <p>Selecciona tus números de la suerte</p>
+    </header>
+
+    <main class="container">
+
+        <section class="reservation-form">
+            <h2>Reservar Boletos</h2>
+            <form id="reserveForm">
+                <div class="form-group">
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="contact">WhatsApp / Correo:</label>
+                    <input type="text" id="contact" required placeholder="Ej. 5512345678">
+                </div>
+                <div class="form-group">
+                    <label for="ticketInput">Números (Ej. 5, 10-15, 20):</label>
+                    <input type="text" id="ticketInput" placeholder="Escribe los números o selecciónalos abajo">
+                    <small>Usa comas para separar y guiones para rangos.</small>
+                </div>
+                <button type="submit" class="btn-primary">Reservar Ahora</button>
+            </form>
+            <div id="message" class="message"></div>
+        </section>
+
+        <section class="legend">
+            <div class="legend-item"><span class="dot available"></span> Disponible</div>
+            <div class="legend-item"><span class="dot reserved"></span> Reservado (Pendiente)</div>
+            <div class="legend-item"><span class="dot sold"></span> Vendido</div>
+        </section>
+
+        <section class="tickets-grid-container">
+            <!-- Virtual scrolling or pagination could be added here for 10k items -->
+            <!-- For simplicity, we render a grid. 10k items is a lot for DOM, so we might implement a simple pagination or filter -->
+            <div class="controls">
+                <input type="text" id="searchTicket" placeholder="Buscar número...">
+                <div class="pagination">
+                    <button id="prevPage">Anterior</button>
+                    <span id="pageInfo">Página 1</span>
+                    <button id="nextPage">Siguiente</button>
+                </div>
+            </div>
+            <div id="ticketsGrid" class="tickets-grid"></div>
+        </section>
+
+    </main>
+
+    <footer
+        style="text-align: center; margin: 40px 0; padding: 20px; color: #555; background-color: #f9f9f9; border-top: 1px solid #eee;">
+        <h3>¡Gracias por tu apoyo!</h3>
+        <p>Tu participación es muy importante para nosotros. ¡Mucha suerte!</p>
+        <small>&copy; 2025 Gran Rifa</small>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

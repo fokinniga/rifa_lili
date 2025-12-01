@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Rifa - Compra de Boletos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <h1>Gran Rifa 2025</h1>
+        <p>Selecciona tus números de la suerte</p>
+    </header>
+
+    <main class="container">
+
+        <section class="reservation-form">
+            <h2>Reservar Boletos</h2>
+            <form id="reserveForm">
+                <div class="form-group">
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="contact">WhatsApp / Correo:</label>
+                    <input type="text" id="contact" required placeholder="Ej. 5512345678">
+                </div>
+                <div class="form-group">
+                    <label for="ticketInput">Números (Ej. 5, 10-15, 20):</label>
+                    <input type="text" id="ticketInput" placeholder="Escribe los números o selecciónalos abajo">
+                    <small>Usa comas para separar y guiones para rangos.</small>
+                </div>
+                <button type="submit" class="btn-primary">Reservar Ahora</button>
+            </form>
+            <div id="message" class="message"></div>
+        </section>
+
+        <section class="legend">
+            <div class="legend-item"><span class="dot available"></span> Disponible</div>
+            <div class="legend-item"><span class="dot reserved"></span> Reservado (Pendiente)</div>
+            <div class="legend-item"><span class="dot sold"></span> Vendido</div>
+        </section>
+
+        <section class="tickets-grid-container">
+            <div class="controls">
+                <input type="text" id="searchTicket" placeholder="Buscar número...">
+                <div class="pagination">
+                    <button id="prevPage">Anterior</button>
+                    <span id="pageInfo">Página 1</span>
+                    <button id="nextPage">Siguiente</button>
+                </div>
+            </div>
+            <div id="ticketsGrid" class="tickets-grid"></div>
+        </section>
+
+    </main>
+
+    <footer
+        style="text-align: center; margin: 40px 0; padding: 40px 20px; color: #444; background-color: #f0f4f8; border-top: 1px solid #d1d9e6; font-family: 'Roboto', sans-serif;">
+        <div style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">✨ Aviso importante sobre la rifa del coche ✨</h3>
+
+            <p>Agradezco profundamente a cada persona que ha adquirido un boleto y que se ha sumado con tanto cariño a
+                esta causa, su gran apoyo es una bendición en este proceso. 💗🙏</p>
+
+            <p>Les informo que la rifa se programará en cuanto se haya vendido, como mínimo, el <strong>65% de los
+                    boletos</strong>.</p>
+
+            <p>Al alcanzar ese porcentaje, publicaré de inmediato la fecha y la dinámica, la cual se realizará en base
+                al resultado de la <strong>Lotería Nacional</strong>, para garantizar total transparencia y confianza
+                para todas las personas participantes.</p>
+
+            <p>Una vez fijada la fecha, compartiré también el número con el que participará cada boleto y el
+                procedimiento para seguir la transmisión en tiempo real.</p>
+
+            <p>Gracias por su ayuda, por su paciencia y por acompañarme con tanto amor en este camino.</p>
+
+            <h4 style="color: #2c3e50; margin-top: 20px;">Dios los bendiga siempre. ✨🕊️💗</h4>
+        </div>
+        <small style="display: block; margin-top: 30px; color: #888;">&copy; 2025 Gran Rifa</small>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
