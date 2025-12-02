@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchTickets() {
     try {
         const res = await fetch('/api/tickets');
-        allTickets = await res.json();
+        const data = await res.json();
+        // Filter out sold tickets so they don't appear in the list
+        allTickets = data.filter(t => t.status !== 'sold');
         renderGrid();
     } catch (err) {
         console.error("Error fetching tickets:", err);
@@ -40,7 +42,7 @@ function renderGrid() {
         if (selectedTickets.has(ticket.number)) {
             div.classList.add('selected');
         }
-        div.textContent = ticket.number;
+        div.textContent = ticket.number.toString().padStart(5, '0');
 
         if (ticket.status === 'available') {
             div.onclick = () => toggleSelection(ticket.number);
