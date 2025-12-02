@@ -47,8 +47,8 @@ db.serialize(() => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'fokinniga@gmail.com',
-        pass: 'ijyuxqsroiqythrb'
+        user: 'apoyoalilianacastillo@gmail.com',
+        pass: 'amfdlcreugupcyhv'
     }
 });
 
