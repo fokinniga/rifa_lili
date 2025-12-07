@@ -56,7 +56,7 @@ async function sendConfirmationEmail(email, name, numbers) {
     if (!email || !email.includes('@')) return;
 
     const mailOptions = {
-        from: '"Gran Rifa 2025" <fokinniga@gmail.com>',
+        from: '"Gran Rifa 2025" <apoyoalilianacastillo@gmail.com>',
         to: email,
         subject: 'Confirmación de Reserva - Gran Rifa 2025',
         html: `
@@ -84,7 +84,7 @@ async function sendApprovalEmail(email, name, numbers) {
     if (!email || !email.includes('@')) return;
 
     const mailOptions = {
-        from: '"Gran Rifa 2025" <fokinniga@gmail.com>',
+        from: '"Gran Rifa 2025" <apoyoalilianacastillo@gmail.com>',
         to: email,
         subject: '¡Pago Aprobado! - Gran Rifa 2025',
         html: `
@@ -129,6 +129,12 @@ app.post('/api/reserve', (req, res) => {
 
     if (!numbers || !Array.isArray(numbers) || numbers.length === 0) {
         return res.status(400).json({ error: "No se seleccionaron números." });
+    }
+
+    // Validate range
+    const invalidNumbers = numbers.filter(n => n < 1 || n > 10000);
+    if (invalidNumbers.length > 0) {
+        return res.status(400).json({ error: `Los siguientes números no son válidos (deben ser entre 1 y 10000): ${invalidNumbers.join(', ')}` });
     }
     if (!name || !contact) {
         return res.status(400).json({ error: "Faltan datos de contacto." });

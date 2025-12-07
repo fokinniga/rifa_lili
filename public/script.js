@@ -145,6 +145,26 @@ async function handleReservation(e) {
         return;
     }
 
+    // Validate Range
+    const outOfRange = numbersToReserve.filter(n => n < 1 || n > 10000);
+    if (outOfRange.length > 0) {
+        showMessage(`Los siguientes números no son válidos (1-10000): ${outOfRange.join(', ')}`, 'error');
+        return;
+    }
+
+    // Validate Availability (Client-side check)
+    // We check against 'allTickets'. Note: allTickets might not be 100% up to date if not refreshed recently,
+    // but it catches most obvious errors. Server is final authority.
+    const unavailable = numbersToReserve.filter(num => {
+        const ticket = allTickets.find(t => t.number === num);
+        return ticket && ticket.status !== 'available';
+    });
+
+    if (unavailable.length > 0) {
+        showMessage(`Los siguientes números ya no están disponibles: ${unavailable.join(', ')}`, 'error');
+        return;
+    }
+
     try {
         const res = await fetch('/api/reserve', {
             method: 'POST',
