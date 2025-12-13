@@ -73,7 +73,7 @@ function toggleSelection(number) {
 
 function updateInputFromSelection() {
     const sorted = Array.from(selectedTickets).sort((a, b) => a - b);
-    document.getElementById('ticketInput').value = sorted.join(', ');
+    document.getElementById('ticketInput').value = sorted.map(n => n.toString().padStart(5, '0')).join(', ');
 }
 
 function parseInputToSelection(e) {
@@ -184,7 +184,7 @@ async function handleReservation(e) {
             const adminNumber = '528125425997'; // Número del Administrador actualizado
 
             if (!contact.includes('@')) {
-                const text = encodeURIComponent(`Hola, acabo de reservar los boletos: ${numbersToReserve.join(', ')}. Mi nombre es ${name}.`);
+                const text = encodeURIComponent(`Hola, acabo de reservar los boletos: ${numbersToReserve.map(n => n.toString().padStart(5, '0')).join(', ')}. Mi nombre es ${name}.`);
                 const waLink = `https://wa.me/${adminNumber}?text=${text}`;
 
                 successMsg += ` <br><br><a href="${waLink}" target="_blank" style="background:#25D366;color:white;padding:5px 10px;text-decoration:none;border-radius:4px;">Enviar comprobante por WhatsApp</a>`;

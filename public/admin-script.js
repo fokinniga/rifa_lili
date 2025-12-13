@@ -60,7 +60,7 @@ function renderReservations() {
         const card = document.createElement('div');
         card.className = 'reservation-card';
 
-        const ticketNumbers = group.tickets.map(t => t.number).join(', ');
+        const ticketNumbers = group.tickets.map(t => t.number.toString().padStart(5, '0')).join(', ');
         const isSold = group.tickets.every(t => t.status === 'sold');
         const statusClass = isSold ? 'status-sold' : 'status-reserved';
         const statusText = isSold ? 'VENDIDO' : 'RESERVADO';
