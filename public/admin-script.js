@@ -2,9 +2,26 @@ let currentGroups = {};
 let currentFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadStats();
     loadReservations();
-    setInterval(loadReservations, 5000); // Auto-refresh every 5 seconds
+    setInterval(() => {
+        loadStats();
+        loadReservations();
+    }, 5000); // Auto-refresh every 5 seconds
 });
+
+async function loadStats() {
+    try {
+        const res = await fetch('/api/admin/stats');
+        const stats = await res.json();
+
+        document.getElementById('stat-sold').textContent = stats.sold || 0;
+        document.getElementById('stat-reserved').textContent = stats.reserved || 0;
+        document.getElementById('stat-available').textContent = stats.available || 0;
+    } catch (err) {
+        console.error('Error loading stats:', err);
+    }
+}
 
 function setFilter(filter) {
     currentFilter = filter;
@@ -105,6 +122,7 @@ async function approveReservation(numbersStr) {
         const data = await res.json();
         if (res.ok) {
             alert(data.message);
+            loadStats();
             loadReservations();
         } else {
             alert('Error: ' + data.error);
@@ -128,6 +146,7 @@ async function releaseReservation(numbersStr) {
         const data = await res.json();
         if (res.ok) {
             alert(data.message);
+            loadStats();
             loadReservations();
         } else {
             alert('Error: ' + data.error);

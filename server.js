@@ -124,6 +124,20 @@ app.get('/api/admin/reservations', (req, res) => {
     });
 });
 
+app.get('/api/admin/stats', (req, res) => {
+    const query = `
+        SELECT 
+            SUM(CASE WHEN status = 'sold' THEN 1 ELSE 0 END) as sold,
+            SUM(CASE WHEN status = 'reserved' THEN 1 ELSE 0 END) as reserved,
+            SUM(CASE WHEN status = 'available' THEN 1 ELSE 0 END) as available
+        FROM tickets
+    `;
+    db.get(query, (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(row);
+    });
+});
+
 app.post('/api/reserve', (req, res) => {
     const { numbers, name, contact } = req.body;
 
