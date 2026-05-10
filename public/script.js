@@ -96,7 +96,7 @@ function parseInputToSelection(e) {
     });
 
     // Only update if valid numbers and within range
-    selectedTickets = new Set([...newSelection].filter(n => n >= 1 && n <= 10000));
+    selectedTickets = new Set([...newSelection].filter(n => n >= 1 && n <= 50000));
     // We don't re-render immediately on every keystroke to avoid lag, maybe debounce?
     // For now, let's just leave it visually unsynced until user clicks or we can add a "Update View" button
     // Or just re-render current page
@@ -105,7 +105,7 @@ function parseInputToSelection(e) {
 
 function handleSearch(e) {
     const val = parseInt(e.target.value);
-    if (!isNaN(val) && val >= 1 && val <= 10000) {
+    if (!isNaN(val) && val >= 1 && val <= 50000) {
         // Find page
         const index = allTickets.findIndex(t => t.number === val);
         if (index !== -1) {
@@ -146,9 +146,9 @@ async function handleReservation(e) {
     }
 
     // Validate Range
-    const outOfRange = numbersToReserve.filter(n => n < 1 || n > 10000);
+    const outOfRange = numbersToReserve.filter(n => n < 1 || n > 50000);
     if (outOfRange.length > 0) {
-        showMessage(`Los siguientes números no son válidos (1-10000): ${outOfRange.join(', ')}`, 'error');
+        showMessage(`Los siguientes números no son válidos (1-50000): ${outOfRange.join(', ')}`, 'error');
         return;
     }
 

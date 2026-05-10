@@ -155,3 +155,32 @@ async function releaseReservation(numbersStr) {
         alert('Error de conexión');
     }
 }
+
+async function exportToExcel() {
+    try {
+        const res = await fetch('/api/admin/reservations');
+        const tickets = await res.json();
+        
+        if (tickets.length === 0) {
+            alert('No hay datos para exportar.');
+            return;
+        }
+
+        const dataForExcel = tickets.map(t => ({
+            'Número': t.number,
+            'Estado': t.status === 'sold' ? 'VENDIDO' : 'RESERVADO',
+            'Nombre': t.holder_name,
+            'Contacto': t.holder_contact,
+            'Fecha de Reserva': new Date(t.reservation_date).toLocaleString()
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Reservas");
+        
+        XLSX.writeFile(workbook, "Base_Datos_Rifa.xlsx");
+    } catch (err) {
+        console.error('Error al exportar:', err);
+        alert('Error al exportar la base de datos.');
+    }
+}

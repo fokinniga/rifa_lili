@@ -25,14 +25,14 @@ db.serialize(() => {
         reservation_date DATETIME
     )`);
 
-    // Initialize 10,000 tickets if empty
+    // Initialize 50,000 tickets if empty
     db.get("SELECT count(*) as count FROM tickets", (err, row) => {
         if (row.count === 0) {
-            console.log("Initializing 10,000 tickets... This might take a moment.");
+            console.log("Initializing 50,000 tickets... This might take a moment.");
             const stmt = db.prepare("INSERT INTO tickets (number, status) VALUES (?, 'available')");
             db.serialize(() => {
                 db.run("BEGIN TRANSACTION");
-                for (let i = 1; i <= 10000; i++) {
+                for (let i = 1; i <= 50000; i++) {
                     stmt.run(i);
                 }
                 db.run("COMMIT");
@@ -146,9 +146,9 @@ app.post('/api/reserve', (req, res) => {
     }
 
     // Validate range
-    const invalidNumbers = numbers.filter(n => n < 1 || n > 10000);
+    const invalidNumbers = numbers.filter(n => n < 1 || n > 50000);
     if (invalidNumbers.length > 0) {
-        return res.status(400).json({ error: `Los siguientes números no son válidos (deben ser entre 1 y 10000): ${invalidNumbers.join(', ')}` });
+        return res.status(400).json({ error: `Los siguientes números no son válidos (deben ser entre 1 y 50000): ${invalidNumbers.join(', ')}` });
     }
     if (!name || !contact) {
         return res.status(400).json({ error: "Faltan datos de contacto." });
