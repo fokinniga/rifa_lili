@@ -10,6 +10,27 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// Middleware de Autenticación Básica para el Administrador
+const adminAuth = (req, res, next) => {
+    const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+    const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
+
+    // Aquí defines el usuario y contraseña (ej. admin / Rifa2025)
+    if (login === 'admin' && password === 'Rifa2025') {
+        return next();
+    }
+
+    res.set('WWW-Authenticate', 'Basic realm="Panel de Administrador"');
+    res.status(401).send('Acceso denegado. Credenciales incorrectas.');
+};
+
+// Proteger el acceso al archivo admin.html directamente
+app.use('/admin.html', adminAuth);
+
+// Proteger todas las rutas de la API del administrador
+app.use('/api/admin', adminAuth);
+
 app.use(express.static('public'));
 
 // Database Setup
