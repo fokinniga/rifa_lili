@@ -4,22 +4,26 @@ const db = new sqlite3.Database('./raffle.db');
 console.log("Conectando a la base de datos para agregar los boletos faltantes...");
 
 db.serialize(() => {
-    // Usamos INSERT OR IGNORE para que solo inserte números que no existen aún.
-    // Así evitamos errores o duplicados si se ejecuta por accidente más de una vez.
-    const stmt = db.prepare("INSERT OR IGNORE INTO tickets (number, status) VALUES (?, 'available')");
+    // Usamos una consulta recursiva (CTE) para insertar 40,000 registros de un solo golpe.
+    // Esto se ejecuta internamente en SQLite y es miles de veces más rápido.
+    const query = `
+        INSERT OR IGNORE INTO tickets (number, status)
+        WITH RECURSIVE
+          cte(x) AS (
+             SELECT 10001
+             UNION ALL
+             SELECT x+1 FROM cte WHERE x < 50000
+          )
+        SELECT x, 'available' FROM cte;
+    `;
 
-    console.log("Iniciando inserción del boleto 10,001 al 50,000. Esto puede tardar unos segundos...");
-    db.run("BEGIN TRANSACTION");
+    console.log("Insertando boletos del 10,001 al 50,000 de manera optimizada...");
     
-    for (let i = 10001; i <= 50000; i++) {
-        stmt.run(i);
-    }
-
-    db.run("COMMIT", (err) => {
+    db.run(query, [], function(err) {
         if (err) {
             console.error("Error al guardar los cambios en la base de datos:", err.message);
         } else {
-            console.log("Los boletos han sido agregados correctamente.");
+            console.log(`Se han procesado los boletos. Nuevos boletos agregados: ${this.changes}`);
             
             // Comprobamos el total final en la base de datos
             db.get("SELECT count(*) as total FROM tickets", (err, row) => {
@@ -30,6 +34,4 @@ db.serialize(() => {
             });
         }
     });
-    
-    stmt.finalize();
 });
